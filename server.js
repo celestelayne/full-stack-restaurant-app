@@ -18,6 +18,7 @@ const { Restaurant, Review, Cuisine } = require('./models')
 // establishing the I/O port
 const PORT = process.env.PORT || 3000
 
+// Root route
 app.get('/', async (request, response) => {
   try {
     response.send('Welcome to the Restaurant App')
@@ -66,6 +67,28 @@ app.post('/restaurants', async (request, response) => {
     response.status(500).json({ msg: e.message })
   }
 })
+
+// UPDATE one
+
+// Coming Soon :-)
+
+// DELETE one
+app.delete('/restaurants/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    console.log(id)
+
+    const restaurant = await Restaurant.findByPk(id)
+
+    if(restaurant) await restaurant.destroy()
+
+    res.json({
+      message: `Restaurant with id ${id} deleted`
+    })
+  } catch (e) {
+    res.json({ msg: e.message })
+  }
+});
 
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
