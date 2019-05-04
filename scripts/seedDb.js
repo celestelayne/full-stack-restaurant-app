@@ -1,9 +1,7 @@
 const { Restaurant, Review, Cuisine } = require('../models.js')
 const { restaurant, review, cuisine } = require('../data.js')
 
-const main = async () => {
-
-  try {
+async function main() {
 
     // delete everything in the database
 
@@ -113,13 +111,18 @@ const main = async () => {
     await shake.addCuisine(sandwich)
     await shake.addCuisine(american)
 
-  } catch(e) {
-    console.log(e)
+}
+
+
+async function run() {
+  try {
+    await main();
+  } catch (e) {
+    console.error(e);
   } finally {
     await process.exit()
   }
 }
 
-
-main();
+run();
 
