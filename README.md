@@ -20,10 +20,12 @@ We're going to be building this application from scratch!
 
 [Part 2: Setting Up the RESTful Routes](sprints/sprint2.md)
 
+[Part 3: Setting up the front end](sprints/sprint3.md)
+
 ## Project Setup
 
 #### ERDs
 
-![Restaurant App ERDs](images/restaurants_app_erd.jpg)
+![Restaurant App ERDs](images/restaurants_app_erd.JPG)
 
 ## Bonus
