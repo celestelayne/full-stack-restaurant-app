@@ -32,13 +32,14 @@ const { Sequelize } = require('sequelize');
   })
 
   // define relationships
-
+  // 1:M
   Restaurant.hasMany(Review, {
     onDelete: 'cascade'
   });
 
   Review.belongsTo(Restaurant)
 
+  // M:M
   Restaurant.belongsToMany(Cuisine, {
     through: 'restaurant_cuisine_xref',
     foreignKey: 'restaurantId'

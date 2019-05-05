@@ -17,18 +17,6 @@ async function main() {
       where: {}
     });
 
-    // add seed data using bulk create
-
-    /*
-    const restaurantData = await Restaurant.bulkCreate(restaurant);
-    const reviewData = await Review.bulkCreate(review);
-    const cuisineData = await Cuisine.bulkCreate(cuisine);
-
-    console.log(`${restaurant.length} restaurants created`);
-    console.log(`${review.length} reviews created`);
-    console.log(`${cuisine.length} cuisines created`);
-    */
-
     // add seed data instances
 
     const motorino = await Restaurant.create({
