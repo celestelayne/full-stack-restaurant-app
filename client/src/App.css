@@ -1,0 +1,34 @@
+.App {
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*width: 100%;*/
+}
+
+/*.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+*/
+
+.restaurant-list {
+  width: 40%;
+  min-height: 100vh;
+  background: lemonchiffon;
+}
+
+.restaurant-details {
+  width: 60%;
+  min-height: 100vh;
+  background: lightblue;
+}
+
+.section-title {
+  text-align: center;
+}
+

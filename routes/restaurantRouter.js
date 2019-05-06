@@ -1,8 +1,19 @@
-const { Router } = require('express');
-const restaurantRouter = Router();
+const express = require('express');
+const { Restaurant } = require('../models');
+const restaurantRouter = express.Router();
+
+restaurantRouter.use((err, req, res, next) => {
+  try {
+    console.log('i\'m a Restaurant Router middleware. Holy cow!');
+  } catch(err) {
+    console.log(err.message)
+  } finally {
+    next();
+  }
+})
 
 // GET all
-restaurantRouter.get('/restaurants', async (request, response) => {
+restaurantRouter.get('/', async (request, response) => {
   try {
     const restaurants = await Restaurant.findAll();
     response.json({
@@ -14,7 +25,7 @@ restaurantRouter.get('/restaurants', async (request, response) => {
 })
 
 // GET one
-restaurantRouter.get('/restaurants/:id', async (request, response) => {
+restaurantRouter.get('/:id', async (request, response) => {
   try {
     const id = request.params.id;
     const restaurant = await Restaurant.findByPk(id)
@@ -25,13 +36,13 @@ restaurantRouter.get('/restaurants/:id', async (request, response) => {
       restaurant
     })
   } catch (e) {
-    response.status(500).json({ msg: e.message })
+    response.status(404).json({ msg: e.message })
   }
 })
 
 // CREATE one
 
-restaurantRouter.post('/restaurants', async (request, response) => {
+restaurantRouter.post('/', async (request, response) => {
   try {
     const restaurant = await Restaurant.create(request.body)
     response.json({
@@ -44,7 +55,7 @@ restaurantRouter.post('/restaurants', async (request, response) => {
 
 // UPDATE one
 
-restaurantRouter.put('/restaurants/:id', async (request, response) => {
+restaurantRouter.put('/:id', async (request, response) => {
   try {
     const id = request.params.id;
     const restaurant = await Restaurant.findByPk(id);
@@ -54,14 +65,14 @@ restaurantRouter.put('/restaurants/:id', async (request, response) => {
       restaurant
     });
   } catch(e) {
-    response.json({
+    response.status(304).json({
       message: e.message
     });
   }
 })
 
 // DELETE one
-restaurantRouter.delete('/restaurants/:id', async (request, response) => {
+restaurantRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id
     console.log(id)

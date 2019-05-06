@@ -1,22 +1,30 @@
 // importing express from our dependencies
 const express = require('express');
-
+const cors = require('cors')
 const bodyParser = require('body-parser')
+const logger = require('morgan');
 
-// initializing the express app
-const app = express();
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
-app.use(bodyParser.json())
+// import routes
+const { restaurantRouter } = require('./routes/restaurantRouter');
+// const { reviewRouter } = require('./routes/reviewRouter');
+// const { cuisineRouter } = require('./routes/cuisineRouter');
 
 // import models
 const { Restaurant, Review, Cuisine } = require('./models')
 
 // establishing the I/O port
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4567
+
+// initializing the express app
+const app = express();
+
+app.use(logger('dev'))
+app.use(cors())
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.use('/restaurants', restaurantRouter)
 
 // Root route
 app.get('/', async (request, response) => {
@@ -27,68 +35,4 @@ app.get('/', async (request, response) => {
   }
 });
 
-// GET all
-app.get('/restaurants', async (request, response) => {
-  try {
-    const restaurants = await Restaurant.findAll();
-    response.json({
-      restaurants
-    })
-  } catch (e) {
-    response.status(500).json({ msg: e.message })
-  }
-})
-
-// GET one
-app.get('/restaurants/:id', async (request, response) => {
-  try {
-    const id = request.params.id;
-    const restaurant = await Restaurant.findByPk(id)
-
-    if (!restaurant) throw Error('Restaurant not found');
-
-    response.json({
-      restaurant
-    })
-  } catch (e) {
-    response.status(500).json({ msg: e.message })
-  }
-})
-
-// CREATE one
-
-app.post('/restaurants', async (request, response) => {
-  try {
-    const restaurant = await Restaurant.create(request.body)
-    response.json({
-      restaurant
-    })
-  } catch (e) {
-    response.status(500).json({ msg: e.message })
-  }
-})
-
-// UPDATE one
-
-// Coming Soon :-)
-
-// DELETE one
-app.delete('/restaurants/:id', async (req, res) => {
-  try {
-    const id = req.params.id
-    console.log(id)
-
-    const restaurant = await Restaurant.findByPk(id)
-
-    if(restaurant) await restaurant.destroy()
-
-    res.json({
-      message: `Restaurant with id ${id} deleted`
-    })
-  } catch (e) {
-    res.json({ msg: e.message })
-  }
-});
-
-
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+app.listen(PORT, () => console.log(`Restaurant app listening on port ${PORT}!`))
