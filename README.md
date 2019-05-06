@@ -22,6 +22,12 @@ We're going to be building this application from scratch!
 
 [Part 3: Setting up the front end](sprints/sprint3.md)
 
+[Part 4: Setting Up the Front End](sprints/sprint4.md)
+
+[Part 5: Identify the App Components](sprints/sprint5.md)
+
+[Part 6: State and Events](sprints/sprint6.md)
+
 ## Project Setup
 
 #### ERDs
