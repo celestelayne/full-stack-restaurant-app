@@ -8,7 +8,7 @@ restaurantRouter.use((err, req, res, next) => {
   } catch(err) {
     console.log(err.message)
   } finally {
-    next();
+    next(err);
   }
 })
 
