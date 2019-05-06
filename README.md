@@ -20,7 +20,7 @@ We're going to be building this application from scratch!
 
 [Part 2: Setting Up the RESTful Routes](sprints/sprint2.md)
 
-[Part 3: Setting up the front end](sprints/sprint3.md)
+[Part 3: Refactor Using Express Router](sprints/sprint3.md)
 
 [Part 4: Setting Up the Front End](sprints/sprint4.md)
 
