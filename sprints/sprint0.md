@@ -158,7 +158,7 @@ review.setRestaurant(motorino)
 
 A model with relationships defined will have a setOtherModel() method defined, to establish a relationship. 
 
-###### Method 1: 
+###### Method 1: Model Relations
 
 ```js
 const restaurant = Restaurant.findByPk(1);

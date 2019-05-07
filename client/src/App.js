@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import fetchRestaurants from './services/restaurants';
+import { Route, Switch } from 'react-router-dom';
 
 // import axios from 'axios';
 
@@ -8,6 +7,14 @@ import Navbar from './components/Navbar/Navbar';
 
 import RestaurantList from './components/RestaurantList/RestaurantList';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
+import CreateRestaurantPage from './components/CreateRestaurantPage/CreateRestaurantPage'
+
+import {
+  fetchRestaurants,
+  getRestaurant,
+  createRestaurant
+} from './services/restaurants';
+
 
 // import './App.css';
 
@@ -17,12 +24,19 @@ class App extends Component {
     super();
 
     this.state = {
-      restaurants: []
+      restaurants: [],
+      currentRestaurant: {}
     }
-    this.restaurants = this.restaurants.bind(this);
+    this.fetchRestaurantData = this.fetchRestaurantData.bind(this);
   }
 
-  async restaurants() {
+  setCurrentRestaurant = (restaurant) => {
+    this.setState({
+      currentRestaurant: restaurant
+    })
+  }
+
+  async fetchRestaurantData() {
     const restaurants = await fetchRestaurants();
     this.setState({
       restaurants: restaurants
@@ -31,20 +45,38 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.restaurants()
+    this.fetchRestaurantData()
   }
 
   render(){
-    console.log(this.state)
+    console.log(this.state.restaurants)
     return (
       <div className="App">
         <Navbar
-          restaurants={this.state.restaurants.restaurants}/>
-        <div className="columns">
-          <RestaurantList
-            restaurants={this.state.restaurants.restaurants} />
-          <RestaurantDetail />
-        </div>
+          restaurants={this.state.restaurants} />
+
+          <div className="columns">
+            <div className="column is-one-third">
+              <RestaurantList
+                restaurants={this.state.restaurants}
+                setCurrentRestaurant={this.setCurrentRestaurant} />
+            </div>
+            <Switch>
+              <div className="column is-two-thirds">
+
+                <Route
+                  path='/restaurants/:id'
+                  render={() => <RestaurantDetail
+                                  restaurants={this.state.restaurants}
+                                  currentRestaurant={this.state.currentRestaurant} />}
+                />
+                <Route
+                  path='/create-restaurant'
+                  component={ CreateRestaurantPage } />
+
+              </div>
+          </Switch>
+          </div>
       </div>
     )
   }

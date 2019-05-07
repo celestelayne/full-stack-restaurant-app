@@ -33,9 +33,31 @@ module.exports = {
 Now, this `restaurantRouter` can be imported in `server.js` and mounted to the main app. This particular set of routes will be nested under /restaurants/:
 
 ```js
-app.use('/restaurants, restaurantRouter);
+app.use('/restaurants', restaurantRouter);
 ```
 Do the same for the `reviewRouter` and the `cuisineRouter`.
+
+#### File Structure
+
+This is what your server-side file structure shoudl look like so far:
+
+```
+├── node_modules
+├── routes
+    ├── cuisineRouter
+    ├── restaurantRouter
+    └── reviewRouter
+├── scripts
+    ├── resetDb.js
+    └── seedDb.js
+├── auth.js
+├── models.js
+├── .gitignore
+├── package.json
+├── README.md
+    server.js
+```
+
 
 #### Thinking Forward: CORS
 

@@ -1,12 +1,19 @@
-// importing express from our dependencies
+/**************************
+ * SERVER-SIDE JAVASCRIPT *
+ **************************/
+
+// require express in app
 const express = require('express');
-const cors = require('cors')
+// get parameters from POST requests
 const bodyParser = require('body-parser')
+// cross origin
+const cors = require('cors')
+// log to the terminal
 const logger = require('morgan');
 
 // import routes
 const { restaurantRouter } = require('./routes/restaurantRouter');
-// const { reviewRouter } = require('./routes/reviewRouter');
+const { reviewRouter } = require('./routes/reviewRouter');
 // const { cuisineRouter } = require('./routes/cuisineRouter');
 
 // import models
@@ -18,6 +25,10 @@ const PORT = process.env.PORT || 4567
 // initializing the express app
 const app = express();
 
+/**************
+ * MIDDLEWARE *
+ **************/
+
 app.use(logger('dev'))
 app.use(cors())
 
@@ -25,14 +36,22 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/restaurants', restaurantRouter)
+app.use('/reviews', reviewRouter)
 
-// Root route
+/**********
+ * ROUTES *
+ **********/
+
 app.get('/', async (request, response) => {
   try {
-    response.send('Welcome to the Restaurant App')
+    response.send('Welcome to the Jeopardy Restaurant App')
   } catch (e) {
     response.status(e.status).json({ msg: e.status })
   }
 });
+
+/**********
+ * SERVER *
+ **********/
 
 app.listen(PORT, () => console.log(`Restaurant app listening on port ${PORT}!`))

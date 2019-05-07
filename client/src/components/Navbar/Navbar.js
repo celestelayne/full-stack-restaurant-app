@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  console.log(props.restaurants)
+  // console.log(props.restaurants.length)
+
   return(
   <nav className="navbar is-info" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
@@ -18,15 +20,20 @@ const Navbar = (props) => {
 
     <div id="navbarBasicExample" className="navbar-menu">
       <div className="navbar-start">
-        <a className="navbar-item">
-          Restaurants
+        <Link
+          to={'/'}
+          className="navbar-item">Restaurants
           <span className="tag tag-spacing is-warning is-rounded">0</span>
-        </a>
+        </Link>
 
-        <a className="navbar-item">
-          Favorites
+        <Link
+          to={'/favorites'}
+          className="navbar-item">Favorites
           <span className="tag tag-spacing is-warning is-rounded">0</span>
-        </a>
+        </Link>
+        <Link
+          className="navbar-item"
+          to={'/create-restaurant'}>Create Restaurant</Link>
       </div>
     </div>
   </nav>

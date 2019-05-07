@@ -1,10 +1,10 @@
 const express = require('express');
-const { Restaurant } = require('../models');
+const { Restaurant, Review } = require('../models');
 const restaurantRouter = express.Router();
 
 restaurantRouter.use((err, req, res, next) => {
   try {
-    console.log('i\'m a Restaurant Router middleware. Holy cow!');
+    console.log('i\'m a Restaurant Router middleware.');
   } catch(err) {
     console.log(err.message)
   } finally {
@@ -15,7 +15,9 @@ restaurantRouter.use((err, req, res, next) => {
 // GET all
 restaurantRouter.get('/', async (request, response) => {
   try {
-    const restaurants = await Restaurant.findAll();
+    const restaurants = await Restaurant.findAll({
+      include: [ Review ]
+    });
     response.json({
       restaurants
     })

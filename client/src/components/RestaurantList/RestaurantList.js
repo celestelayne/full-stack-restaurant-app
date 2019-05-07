@@ -2,16 +2,17 @@ import React from 'react';
 
 import RestaurantItem from '../RestaurantItem/RestaurantItem'
 
-const RestaurantList = ({restaurants}) => {
+const RestaurantList = ({restaurants, setCurrentRestaurant}) => {
 
   const allRestaurants = restaurants && restaurants.map((restaurant, index) =>
     <RestaurantItem
-      key={restaurant.id}
-      restaurant={restaurant} />
+      key={index}
+      restaurant={restaurant}
+      setCurrentRestaurant={setCurrentRestaurant} />
   )
 
   return(
-    <div className="restaurant-list column is-one-third">
+    <div className="RestaurantsList">
       <h1 className="title">RESTAURANTS</h1>
       { allRestaurants }
     </div>
