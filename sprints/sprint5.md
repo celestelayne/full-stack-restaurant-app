@@ -331,10 +331,26 @@ render(){
 }
 ```
 
-#### Create the new builidng form
+#### Create the new restaurant form
 
 First, we define the initial state of the form in the constructor.
 
 We define the initial state of the form in the constructor.
 
 Looks like a form. When it gets submitted we run two functions (we're using es6 arrow function here to pass an anonymous function with an event argument). They are the `onFormSubmit` and `onFormChange` functions defined in this component.
+
+#### handleRestaurantDelete method
+
+Deleting will work similarly with regard to passing state. Let's update the Building component to contain a UI with which to delete a building. In src/components/RestaurantItem/RestaurantItem.js we will write a handleRestaurantDelete method:
+
+```js
+const Restaurant = ({restaurant, setCurrentBuilding}) => {
+    const handleRestaurantDelete = (event) => {
+    
+    axios.delete(`/restaurants/${restaurant.id}`)
+      .then(res => console.log(res.data, "Building deleted"))
+    
+    }
+}
+```
+

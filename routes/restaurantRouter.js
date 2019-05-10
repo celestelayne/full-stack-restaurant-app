@@ -2,9 +2,11 @@ const express = require('express');
 const { Restaurant, Review } = require('../models');
 const restaurantRouter = express.Router();
 
+// middleware that is specific to this router
 restaurantRouter.use((err, req, res, next) => {
   try {
     console.log('i\'m a Restaurant Router middleware.');
+    console.log('Time: ', Date.now())
   } catch(err) {
     console.log(err.message)
   } finally {
@@ -12,7 +14,8 @@ restaurantRouter.use((err, req, res, next) => {
   }
 })
 
-// GET all
+// define the root route
+// GET -- localhost:PORT/restaurants
 restaurantRouter.get('/', async (request, response) => {
   try {
     const restaurants = await Restaurant.findAll({
@@ -26,7 +29,7 @@ restaurantRouter.get('/', async (request, response) => {
   }
 })
 
-// GET one
+// GET -- localhost:PORT/restaurants/1
 restaurantRouter.get('/:id', async (request, response) => {
   try {
     const id = request.params.id;
@@ -42,7 +45,7 @@ restaurantRouter.get('/:id', async (request, response) => {
   }
 })
 
-// CREATE one
+// CREATE -- localhost:PORT/restaurants
 
 restaurantRouter.post('/', async (request, response) => {
   try {
@@ -55,7 +58,7 @@ restaurantRouter.post('/', async (request, response) => {
   }
 })
 
-// UPDATE one
+// UPDATE -- localhost:PORT/restaurants/1
 
 restaurantRouter.put('/:id', async (request, response) => {
   try {
@@ -73,15 +76,19 @@ restaurantRouter.put('/:id', async (request, response) => {
   }
 })
 
-// DELETE one
+// DELETE -- localhost:PORT/restaurants/1
 restaurantRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id
     console.log(id)
 
-    const restaurant = await Restaurant.findByPk(id)
+    // const restaurant = await Restaurant.findByPk(id)
 
-    if(restaurant) await restaurant.destroy()
+    await Restaurant.destroy({
+      where: {
+        id: id
+      }
+    })
 
     response.json({
       message: `Restaurant with id ${id} deleted`

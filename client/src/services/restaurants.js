@@ -35,4 +35,19 @@ export const createRestaurant = async (data) => {
   } catch (e) {
     console.log(e)
   }
-};
+}
+
+export const updateRestaurant = async (data, id) => {
+  const resp = await api.put(`/${id}`, data);
+  return resp.data.restaurant;
+}
+
+export const deleteRestaurant = async (data, id) => {
+  try{
+    const resp = await api.delete(`/${id}`, data);
+    console.log(resp)
+    return resp.data.restaurant;
+  } catch (e) {
+    console.log(e)
+  }
+}

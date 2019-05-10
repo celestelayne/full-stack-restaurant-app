@@ -4,8 +4,6 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import {
-  fetchRestaurants,
-  getRestaurant,
   createRestaurant
 } from '../../services/restaurants';
 

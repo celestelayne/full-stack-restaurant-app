@@ -8,13 +8,16 @@ import Navbar from './components/Navbar/Navbar';
 import RestaurantList from './components/RestaurantList/RestaurantList';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
 import CreateRestaurantPage from './components/CreateRestaurantPage/CreateRestaurantPage'
+import UpdateRestaurantPage from './components/UpdateRestaurantPage/UpdateRestaurantPage'
+
 
 import {
   fetchRestaurants,
   getRestaurant,
-  createRestaurant
+  createRestaurant,
+  updateRestaurant,
+  deleteRestaurant
 } from './services/restaurants';
-
 
 // import './App.css';
 
@@ -74,6 +77,13 @@ class App extends Component {
                   path='/create-restaurant'
                   component={ CreateRestaurantPage } />
 
+                <Route
+                    path='/update-restaurant/:id'
+                    render={() => <UpdateRestaurantPage
+                                    restaurants={this.state.restaurants}
+                                    setcurrentRestaurant={this.setcurrentRestaurant}
+                                    currentRestaurant={this.state.currentRestaurant} />}
+                />
               </div>
           </Switch>
           </div>
